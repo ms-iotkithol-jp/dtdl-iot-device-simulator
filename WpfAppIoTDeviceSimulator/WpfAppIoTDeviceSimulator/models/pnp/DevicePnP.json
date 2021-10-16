@@ -1,0 +1,79 @@
+{
+  "@context": "dtmi:dtdl:context;2",
+  "@id": "dtmi:com:example:DevicePnP;1",
+  "@type": "Interface",
+  "displayName": "DevicePnP",
+  "contents": [
+    {
+      "@type": "Telemetry",
+      "name": "temperature",
+      "schema": "double",
+      "description": "kind=delta-prop;initial=25.0;target=30.0;coef=0.01;noise=0.01"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "accelerometer",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "x",
+            "schema": "double",
+            "description": "kind=circular;radius=1.0;phase=0.0;frequency=1000;initial=0.0;noise=0.01"
+          },
+          {
+            "name": "y",
+            "schema": "double",
+            "description": "kind=circular;radius=1.0;phase=pi/2;frequency=1000;initial=0.0;noise=0.01"
+          },
+          {
+            "name": "z",
+            "schema": "double",
+            "description": "kind=circular;radius=1.0;phase=0.5*pi;frequency=1000;initial=0.0;noise=0.01"
+          },
+          {
+            "name": "Status",
+            "schema": {
+              "@type": "Enum",
+              "valueSchema": "string",
+              "enumValues": [
+                {"name": "ENABLE","enumValue": "ENABLE", "description": "initial=true"},
+                {"name": "DISABLE","enumValue": "DISABLE"}
+              ]            }
+          },
+          {
+            "name":"MeasureRange",
+            "schema": {
+              "@type": "Enum",
+              "valueSchema": "integer",
+              "enumValues": [
+                {"name": "G1", "enumValue": 1, "description": "initial=true"},
+                {"name": "G2", "enumValue": 2},
+                {"name": "G4", "enumValue": 4}
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "timestamp",
+      "schema": "dateTime",
+      "description": "kind=timestamp"
+    },
+    {
+      "@type": "Property",
+      "name": "deviceStatus",
+      "schema": "string"
+    },
+    {
+      "@type": "Command",
+      "name": "reboot",
+      "request": {
+        "name": "delay",
+        "schema": "integer"
+      }
+    }
+  ]
+}
