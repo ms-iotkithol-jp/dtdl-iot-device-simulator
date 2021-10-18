@@ -28,7 +28,6 @@ namespace WpfAppIoTDeviceSimulator
         public MainWindow()
         {
             InitializeComponent();
-            rand = new Random(DateTime.Now.Millisecond);
             this.Loaded += MainWindow_Loaded;
         }
 
@@ -55,23 +54,6 @@ namespace WpfAppIoTDeviceSimulator
             {
                 ShowLog("Parsing...");
                 await deviceDTDLParser.ParseDTDLModel(modelJson);
-                foreach(var tpSpec in deviceDTDLParser.TelemetryParameterSpecs)
-                {
-                    tsNodeRepository.Add(tpSpec);
-                    ShowLog($"Parsed - {tpSpec.Name}");
-                }
-#if test
-                tsNodeRepository.Update();
-                var json = tsNodeRepository.GetJSON();
-#endif
-                foreach (var key in tsNodeRepository.TelemetryParameters.Keys)
-                {
-                    var tp = tsNodeRepository.TelemetryParameters[key];
-                    if (!tp.IsTimestamp())
-                    {
-                        sensorParameters.Add(tp);
-                    }
-                }
 
             }
 
@@ -83,7 +65,6 @@ namespace WpfAppIoTDeviceSimulator
         }
 
         DeviceDTDLParser deviceDTDLParser;
-        TSNodeRepository tsNodeRepository = new TSNodeRepository();
         ObservableCollection<TelemetryParameter> sensorParameters = new ObservableCollection<TelemetryParameter>();
                void ShowLog(string log)
         {
@@ -94,10 +75,7 @@ namespace WpfAppIoTDeviceSimulator
             tbLog.Text = sb.ToString();
         }
 
-        DeviceClient deviceClient;
-        Random rand;
-        string deviceId;
-
+        IoTDeviceSimulator deviceSimulator;
         private async void buttonConnect_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(tbIoTHubCS.Text))
@@ -105,15 +83,32 @@ namespace WpfAppIoTDeviceSimulator
                 MessageBox.Show("Please set IoT Hub Device Connection String!");
                 return;
             }
-            deviceClient = DeviceClient.CreateFromConnectionString(tbIoTHubCS.Text);
-            await deviceClient.OpenAsync();
-            var csBuilder = IotHubConnectionStringBuilder.Create(tbIoTHubCS.Text);
-            deviceId = csBuilder.DeviceId;
-            ShowLog($"Connected to IoT Hub as {deviceId}");
+            deviceSimulator = new IoTDeviceSimulator(tbIoTHubCS.Text);
+            await deviceSimulator.Connect();
+            
+            ShowLog($"Connected to IoT Hub as {deviceSimulator.DeviceId}");
+
+            foreach (var tpSpec in deviceDTDLParser.TelemetryParameterSpecs)
+            {
+                deviceSimulator.Add(tpSpec);
+                ShowLog($"Parsed - {tpSpec.Name}");
+            }
+#if test
+                tsNodeRepository.Update();
+                var json = tsNodeRepository.GetJSON();
+#endif
+            foreach (var key in deviceSimulator.TelemetryParameters.Keys)
+            {
+                var tp = deviceSimulator.TelemetryParameters[key];
+                if (!tp.IsTimestamp())
+                {
+                    sensorParameters.Add(tp);
+                }
+            }
+
+
             buttonSendingControl.IsEnabled = true;
         }
-
-        double currentValue = 0.0f;
 
 
         DispatcherTimer timer = null;
@@ -141,12 +136,8 @@ namespace WpfAppIoTDeviceSimulator
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            tsNodeRepository.Update();
-            var msg = tsNodeRepository.GetMessageJSON();
-            var msgBytes = System.Text.Encoding.UTF8.GetBytes(msg);
-            var iothubMsg = new Message(msgBytes);
-            await deviceClient.SendEventAsync(iothubMsg);
-            ShowLog($"Message Send - {msg},{msgBytes.Length} bytes");
+            var msgContent = await deviceSimulator.Send();
+            ShowLog($"Message Send - {System.Text.Encoding.UTF8.GetString(msgContent)},{msgContent.Length} bytes");
         }
 
         private void lbTPs_SelectionChanged(object sender, SelectionChangedEventArgs e)
