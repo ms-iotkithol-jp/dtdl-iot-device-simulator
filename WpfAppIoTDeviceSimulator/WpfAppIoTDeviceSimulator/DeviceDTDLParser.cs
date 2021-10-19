@@ -13,6 +13,8 @@ namespace WpfAppIoTDeviceSimulator
         private string timestampPropertyName = "";
         public string Id { get { return _id; } }
         string _id;
+        string _name;
+        public string Name { get { return _name; } }
 
         public List<TelemetryPrameterSpec> TelemetryParameterSpecs { get { return telemetryPrameterSpecs; } }
         public string TimestampPropertyName { get { return timestampPropertyName; } }
@@ -28,6 +30,7 @@ namespace WpfAppIoTDeviceSimulator
                 {
                     var ifDef = (DTInterfaceInfo)v;
                     _id = ifDef.Id.ToString();
+                    _name = ifDef.DisplayName["en"].ToString();
                     foreach (var ckey in ifDef.Contents.Keys)
                     {
                         var c = ifDef.Contents[ckey];

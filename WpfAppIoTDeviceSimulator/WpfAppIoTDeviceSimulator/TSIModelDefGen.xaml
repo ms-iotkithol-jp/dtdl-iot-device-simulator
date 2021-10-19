@@ -1,0 +1,167 @@
+﻿<Window x:Class="WpfAppIoTDeviceSimulator.TSIModelDefGen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppIoTDeviceSimulator"
+        mc:Ignorable="d"
+        Title="TSI Model Definition Generator" Height="510" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="212"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Orange" BorderThickness="1" Margin="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Hierachies" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="buttonLoadHierachiesFile" Content="Load Hierachies" Margin="1,1,1,0" Height="28" VerticalAlignment="Top" Click="buttonLoadHierachiesFile_Click"/>
+                        <TextBox Name="tbLoadHierachiesModelFileName" VerticalAlignment="Center" Margin="1" Grid.Column="1"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Hierachies Model Id : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbHierachiesId" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Hierachies Name : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbHierachiesName" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="buttonHierachyAdd" Content="Add" Margin="1" Click="buttonHierachyAdd_Click"/>
+                            <TextBox Name="tbInstanceName" VerticalAlignment="Center" Margin="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <Button Name="buttonHierachyDelete" Content="Delete" Margin="1" Grid.Column="3" Click="buttonHierachyMgmt_Click"/>
+                            <Button Name="buttonHierachiesGen" Content="Generatre" Margin="1" Grid.Column="4" Click="buttonHierachiesGen_Click"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Name="buttonHierachyUp" Content="Up" Margin="1" Grid.Column="1" Grid.Row="0" Click="buttonHierachyMgmt_Click"/>
+                            <Button Name="buttonHierachyDown" Content="Down" Margin="1" Grid.Column="1" Grid.Row="3" Click="buttonHierachyMgmt_Click" />
+                            <ListBox Name="lbHierachies" Grid.RowSpan="4" Margin="1" SelectionChanged="lbHierachies_SelectionChanged"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" BorderBrush="Orange" BorderThickness="1" Margin="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Instance" Margin="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="buttonLoadTypeFile" Content="Load Type" Margin="1" Click="buttonLoadTypeFile_Click"/>
+                        <TextBox Name="tbLoadTypeModelFileName" VerticalAlignment="Center" Margin="1" Grid.Column="1"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Hierachies : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbInstanceHierachies" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Type Id : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbTypeId" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Time Series Id : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbTimeSeriesId" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="TS Name : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbTimeSeriesName" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                        <Button Name="buttonInstanceGen" Grid.Column="2" Content="Generate" Margin="1" Click="buttonInstanceGen_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" BorderBrush="Orange" BorderThickness="1" Margin="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="buttonSaveToFile" Content="Save" Margin="1" Click="buttonSaveToFile_Click"/>
+                    <TextBox Name="tbSavedFileName" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                </Grid>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <TextBox Name="tbGenContent"/>
+                </ScrollViewer>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

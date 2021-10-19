@@ -108,6 +108,7 @@ namespace WpfAppIoTDeviceSimulator
 
 
             buttonSendingControl.IsEnabled = true;
+            buttonGenTSIhierachies.IsEnabled = true;
         }
 
 
@@ -168,9 +169,9 @@ namespace WpfAppIoTDeviceSimulator
         TSITypeGenerator typeGenerator;
         private void buttonGenTSIType_Click(object sender, RoutedEventArgs e)
         {
-            string id = Guid.NewGuid().ToString();
-            typeGenerator = new TSITypeGenerator(id, deviceDTDLParser.Id);
-            string gen = typeGenerator.GenerateTypeDef(deviceDTDLParser.TelemetryParameterSpecs);
+            var typeId = Guid.NewGuid().ToString();
+            typeGenerator = new TSITypeGenerator(typeId, deviceDTDLParser.Id, deviceDTDLParser.TelemetryParameterSpecs);
+            string gen = typeGenerator.GenerateTypeDef();
             var fileWindow = new TSIModelFile(gen);
             fileWindow.Show();
 
@@ -179,6 +180,23 @@ namespace WpfAppIoTDeviceSimulator
         private void buttonGenTSIInstance_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void buttonGenTSIhierachies_Click(object sender, RoutedEventArgs e)
+        {
+            string typeId = null;
+            string typeName = null;
+            if (typeGenerator != null)
+            {
+                typeId = typeGenerator.TypeId;
+                typeName = typeGenerator.TypeName;
+            }
+            else
+            {
+                typeName = deviceDTDLParser.Id;
+            }
+            var window = new TSIModelDefGen(deviceSimulator.DeviceId, typeId, typeName);
+            window.Show();
         }
     }
 }

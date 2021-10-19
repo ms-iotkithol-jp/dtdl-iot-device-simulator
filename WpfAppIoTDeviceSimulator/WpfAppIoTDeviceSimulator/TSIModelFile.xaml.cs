@@ -43,7 +43,7 @@ namespace WpfAppIoTDeviceSimulator
             if (dialog.ShowDialog() == true)
             {
                 tbFileName.Text = dialog.FileName;
-                using (var fs = File.OpenWrite(dialog.FileName))
+                using (var fs = File.Create(dialog.FileName))
                 {
                     using (var writer = new StreamWriter(fs))
                     {
