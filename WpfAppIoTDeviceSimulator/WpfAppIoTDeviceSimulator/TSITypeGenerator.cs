@@ -193,17 +193,17 @@ namespace WpfAppIoTDeviceSimulator
         }
     }
 
-    class TSIHierachiesGenerator : TSIGenerator
+    class TSIHierarchiesGenerator : TSIGenerator
     {
-        public TSIHierachiesGenerator(string id, string name, string[] instances)
+        public TSIHierarchiesGenerator(string id, string name, string[] instances)
         {
-            hierachiesId = id;
-            hierachiesName = name;
-            hierachiesInstances = instances;
+            hierarchiesId = id;
+            hierarchiesName = name;
+            hierarchiesInstances = instances;
         }
-        string hierachiesId;
-        string hierachiesName;
-        string[] hierachiesInstances;
+        string hierarchiesId;
+        string hierarchiesName;
+        string[] hierarchiesInstances;
 
         public string Generate()
         {
@@ -212,12 +212,12 @@ namespace WpfAppIoTDeviceSimulator
             {
                 GenerateHead(writer);
                 writer.WriteLine("{");
-                writer.WriteLine($"\"id\": \"{hierachiesId}\",");
-                writer.WriteLine($"\"name\": \"{hierachiesName}\",");
+                writer.WriteLine($"\"id\": \"{hierarchiesId}\",");
+                writer.WriteLine($"\"name\": \"{hierarchiesName}\",");
                 writer.WriteLine("\"source\": {");
                 writer.WriteLine("\"instanceFieldNames\": [");
                 bool isFirst = true;
-                foreach(var instance in hierachiesInstances)
+                foreach(var instance in hierarchiesInstances)
                 {
                     if (isFirst)
                     {

@@ -33,7 +33,7 @@ namespace WpfAppIoTDeviceSimulator
 
         private void TSIModelDefGen_Loaded(object sender, RoutedEventArgs e)
         {
-            lbHierachies.ItemsSource = hierarchies;
+            lbHierarchies.ItemsSource = hierarchies;
             tbTimeSeriesId.Text = TimeSeriesId;
             tbTypeId.Text = TypeId;
             tbTimeSeriesName.Text = TimeSeriesId;
@@ -54,13 +54,13 @@ namespace WpfAppIoTDeviceSimulator
 
         ObservableCollection<string> hierarchies = new ObservableCollection<string>();
 
-        private void buttonLoadHierachiesFile_Click(object sender, RoutedEventArgs e)
+        private void buttonLoadHierarchiesFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter= "TSI Hierachies(*.json)|*.json";
+            dialog.Filter= "TSI Hierarchies(*.json)|*.json";
             if (dialog.ShowDialog() == true)
             {
-                tbLoadHierachiesModelFileName.Text = dialog.FileName;
+                tbLoadHierarchiesModelFileName.Text = dialog.FileName;
                 using (var fs = File.OpenRead(dialog.FileName))
                 {
                     using (var reader = new StreamReader(fs))
@@ -71,8 +71,8 @@ namespace WpfAppIoTDeviceSimulator
                             dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
                             foreach (dynamic elem in json.put)
                             {
-                                tbHierachiesId.Text = elem.id;
-                                tbHierachiesName.Text = elem.name;
+                                tbHierarchiesId.Text = elem.id;
+                                tbHierarchiesName.Text = elem.name;
                                 dynamic instanceFieldNames = elem.source.instanceFieldNames;
                                 hierarchies.Clear();
                                 foreach (var ifn in instanceFieldNames)
@@ -127,23 +127,23 @@ namespace WpfAppIoTDeviceSimulator
 
         
 
-        private void buttonHierachiesGen_Click(object sender, RoutedEventArgs e)
+        private void buttonHierarchiesGen_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbHierachiesName.Text))
+            if (string.IsNullOrEmpty(tbHierarchiesName.Text))
             {
-                MessageBox.Show("Please input 'Hierachies Name'");
+                MessageBox.Show("Please input 'Hierarchies Name'");
                 return;
             }
-            if (string.IsNullOrEmpty(tbHierachiesId.Text))
+            if (string.IsNullOrEmpty(tbHierarchiesId.Text))
             {
-                tbHierachiesId.Text = Guid.NewGuid().ToString();
+                tbHierarchiesId.Text = Guid.NewGuid().ToString();
             }
-            var generator = new TSIHierachiesGenerator(tbHierachiesId.Text, tbHierachiesName.Text, hierarchies.ToArray());
+            var generator = new TSIHierarchiesGenerator(tbHierarchiesId.Text, tbHierarchiesName.Text, hierarchies.ToArray());
             tbGenContent.Text = generator.Generate();
             tbSavedFileName.Text = "";
         }
 
-        private void buttonHierachyAdd_Click(object sender, RoutedEventArgs e)
+        private void buttonHierarchyAdd_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(tbInstanceName.Text))
             {
@@ -162,23 +162,23 @@ namespace WpfAppIoTDeviceSimulator
 
         private void UpdateHiearchiesDef()
         {
-            tbInstanceHierachies.Text = "";
+            tbInstanceHierarchies.Text = "";
             for(int i = 0; i < hierarchies.Count - 1; i++)
             {
-                if (!string.IsNullOrEmpty(tbInstanceHierachies.Text))
+                if (!string.IsNullOrEmpty(tbInstanceHierarchies.Text))
                 {
-                    tbInstanceHierachies.Text += ":";
+                    tbInstanceHierarchies.Text += ":";
                 }
-                tbInstanceHierachies.Text += $"{hierarchies[i]}0";
+                tbInstanceHierarchies.Text += $"{hierarchies[i]}0";
             }
-            if (!string.IsNullOrEmpty(tbInstanceHierachies.Text))
+            if (!string.IsNullOrEmpty(tbInstanceHierarchies.Text))
             {
-                tbInstanceHierachies.Text += ":";
+                tbInstanceHierarchies.Text += ":";
             }
-            tbInstanceHierachies.Text += tbTimeSeriesId.Text;
+            tbInstanceHierarchies.Text += tbTimeSeriesId.Text;
         }
 
-        private void buttonHierachyMgmt_Click(object sender, RoutedEventArgs e)
+        private void buttonHierarchyMgmt_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(tbInstanceName.Text))
             {
@@ -212,17 +212,17 @@ namespace WpfAppIoTDeviceSimulator
             UpdateHiearchiesDef();
         }
 
-        private void lbHierachies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lbHierarchies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tbInstanceName.Text = lbHierachies.SelectedItem as string;
+            tbInstanceName.Text = lbHierarchies.SelectedItem as string;
         }
 
         private void buttonInstanceGen_Click(object sender, RoutedEventArgs e)
         {
-            var instances = tbInstanceHierachies.Text.Split(new char[] { ':' });
+            var instances = tbInstanceHierarchies.Text.Split(new char[] { ':' });
             if (instances.Length != hierarchies.Count-1)
             {
-                MessageBox.Show("Please input instance hierachies. Need the same number of items separated by a ':'");
+                MessageBox.Show("Please input instance hierarchies. Need the same number of items separated by a ':'");
                 return;
             }
             var model = new Dictionary<string, string>();
@@ -232,7 +232,7 @@ namespace WpfAppIoTDeviceSimulator
                 model.Add(hierarchies[i], instances[i]);
             }
             model.Add(hierarchies[i], tbTimeSeriesId.Text);
-            var generator = new TSIInstanceGenerator(tbTimeSeriesId.Text, tbTimeSeriesName.Text, tbTypeId.Text, tbHierachiesId.Text, model);
+            var generator = new TSIInstanceGenerator(tbTimeSeriesId.Text, tbTimeSeriesName.Text, tbTypeId.Text, tbHierarchiesId.Text, model);
             tbGenContent.Text = generator.Generate();
             tbSavedFileName.Text = "";
         }

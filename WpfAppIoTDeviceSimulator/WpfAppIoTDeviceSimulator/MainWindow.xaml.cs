@@ -108,7 +108,7 @@ namespace WpfAppIoTDeviceSimulator
 
 
             buttonSendingControl.IsEnabled = true;
-            buttonGenTSIhierachies.IsEnabled = true;
+            buttonGenTSIhierarchies.IsEnabled = true;
         }
 
 
@@ -182,7 +182,7 @@ namespace WpfAppIoTDeviceSimulator
 
         }
 
-        private void buttonGenTSIhierachies_Click(object sender, RoutedEventArgs e)
+        private void buttonGenTSIhierarchies_Click(object sender, RoutedEventArgs e)
         {
             string typeId = null;
             string typeName = null;

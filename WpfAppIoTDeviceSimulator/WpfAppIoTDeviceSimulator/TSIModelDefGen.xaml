@@ -25,30 +25,30 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Hierachies" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Hierarchies" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Name="buttonLoadHierachiesFile" Content="Load Hierachies" Margin="1,1,1,0" Height="28" VerticalAlignment="Top" Click="buttonLoadHierachiesFile_Click"/>
-                        <TextBox Name="tbLoadHierachiesModelFileName" VerticalAlignment="Center" Margin="1" Grid.Column="1"/>
+                        <Button Name="buttonLoadHierarchiesFile" Content="Load Hierarchies" Margin="1,1,1,0" Height="28" VerticalAlignment="Top" Click="buttonLoadHierarchiesFile_Click"/>
+                        <TextBox Name="tbLoadHierarchiesModelFileName" VerticalAlignment="Center" Margin="1" Grid.Column="1"/>
                     </Grid>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Hierachies Model Id : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
-                        <TextBox Name="tbHierachiesId" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                        <TextBlock Text="Hierarchies Model Id : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbHierarchiesId" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
                     </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Hierachies Name : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
-                        <TextBox Name="tbHierachiesName" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                        <TextBlock Text="Hierarchies Name : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbHierarchiesName" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
                     </Grid>
                     <Grid Grid.Row="4">
                         <Grid.RowDefinitions>
@@ -63,10 +63,10 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Name="buttonHierachyAdd" Content="Add" Margin="1" Click="buttonHierachyAdd_Click"/>
+                            <Button Name="buttonHierarchyAdd" Content="Add" Margin="1" Click="buttonHierarchyAdd_Click"/>
                             <TextBox Name="tbInstanceName" VerticalAlignment="Center" Margin="1" Grid.Column="1" Grid.ColumnSpan="2"/>
-                            <Button Name="buttonHierachyDelete" Content="Delete" Margin="1" Grid.Column="3" Click="buttonHierachyMgmt_Click"/>
-                            <Button Name="buttonHierachiesGen" Content="Generatre" Margin="1" Grid.Column="4" Click="buttonHierachiesGen_Click"/>
+                            <Button Name="buttonHierarchyDelete" Content="Delete" Margin="1" Grid.Column="3" Click="buttonHierarchyMgmt_Click"/>
+                            <Button Name="buttonHierarchiesGen" Content="Generatre" Margin="1" Grid.Column="4" Click="buttonHierarchiesGen_Click"/>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -79,9 +79,9 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Button Name="buttonHierachyUp" Content="Up" Margin="1" Grid.Column="1" Grid.Row="0" Click="buttonHierachyMgmt_Click"/>
-                            <Button Name="buttonHierachyDown" Content="Down" Margin="1" Grid.Column="1" Grid.Row="3" Click="buttonHierachyMgmt_Click" />
-                            <ListBox Name="lbHierachies" Grid.RowSpan="4" Margin="1" SelectionChanged="lbHierachies_SelectionChanged"/>
+                            <Button Name="buttonHierarchyUp" Content="Up" Margin="1" Grid.Column="1" Grid.Row="0" Click="buttonHierarchyMgmt_Click"/>
+                            <Button Name="buttonHierarchyDown" Content="Down" Margin="1" Grid.Column="1" Grid.Row="3" Click="buttonHierarchyMgmt_Click" />
+                            <ListBox Name="lbHierarchies" Grid.RowSpan="4" Margin="1" SelectionChanged="lbHierarchies_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -111,8 +111,8 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Hierachies : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
-                        <TextBox Name="tbInstanceHierachies" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
+                        <TextBlock Text="Hierarchies : " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1,0,2,0"/>
+                        <TextBox Name="tbInstanceHierarchies" Grid.Column="1" VerticalAlignment="Center" Margin="1"/>
                     </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>

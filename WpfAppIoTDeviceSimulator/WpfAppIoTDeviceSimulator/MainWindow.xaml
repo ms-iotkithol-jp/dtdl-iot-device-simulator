@@ -68,7 +68,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Time Series Insights Model Definition" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
                         <Button Name="buttonGenTSIType" Content="types.json" Grid.Row="1" Margin="1" Click="buttonGenTSIType_Click"/>
-                        <Button Name="buttonGenTSIhierachies" Content="hierarchies.json" Grid.Column="1" Grid.Row="1" Margin="1" Click="buttonGenTSIhierachies_Click" IsEnabled="False"/>
+                        <Button Name="buttonGenTSIhierarchies" Content="hierarchies.json" Grid.Column="1" Grid.Row="1" Margin="1" Click="buttonGenTSIhierarchies_Click" IsEnabled="False"/>
                     </Grid>
                 </Border>
             </Grid>
