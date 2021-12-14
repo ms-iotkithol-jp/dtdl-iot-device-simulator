@@ -35,9 +35,9 @@ IoT Hub Plug ＆ Play の概要は、https://docs.microsoft.com/ja-jp/azure/iot-
 |target|目標値|double|〇|×|×|delta-propの場合、現在の値とこの値の差分にcoefを乗算した値を現在値に足し、targetで指定された値に近づけていく|
 |coef|目的値に近づけていくときの係数|double|〇|×|×||
 |noise|ホワイトノイズ|double|〇|〇|△|各kindの現在値を更新したときに、-0.5～0.5にnoiseの値を乗算した値を現在値に加算する<br/>※kindがdiscreteの場合はdouble指定の時だけ指定可能|
-|radius|半径|double|×|〇×||
-|phase|初期位相|double|×|〇×||
-|frequency|周期（msec)|double|×|〇×||
+|radius|半径|double|×|〇|×||
+|phase|初期位相|double|×|〇|×||
+|frequency|周期（msec)|double|×|〇|×||
 |typename|データ型|NA|×|×|〇|integer または double|
 
 シミュレータは起動時に DTDL（JSONファイル） の Plug ＆ Play で定義されたルールを読み込み、そのルールに従い、シミュレータの GUI で指定可能な時間間隔（msec単位）で、現在値を計算し、IoT Hub に JSON データを送信する。  
